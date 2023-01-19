@@ -7,11 +7,10 @@
         int[] arr1Common = CommonItems(arr1);
 
         /* write method to print arr1Common */
-        foreach(var number in arr1Common)
+        foreach (var number in arr1Common)
         {
             Console.WriteLine(number);
         }
-
 
         //Challenge 2
         int[][] arr2 = { new int[] { 1, 2 }, new int[] { 1, 2, 3 } };
@@ -23,13 +22,23 @@
         CalculateDiff(arr3);
         /* write method to print arr3 */
 
-        // //Challenge 4
-        // int[,] arr4 = { { 1, 2, 3 }, { 4, 5, 6 } };
-        // int[,] arr4Inverse = InverseRec(arr4);
-        // /* write method to print arr4Inverse */
+        //Challenge 4
+        int[,] arr4 = { { 1, 2, 3 }, { 4, 5, 6 } };
+        int[,] arr4Inverse = InverseRec(arr4);
+
+        /* write method to print arr4Inverse */
+        for(int i = 0; i < arr4Inverse.GetLength(0); i++)
+        {
+            for(int j = 0; j < arr4Inverse.GetLength(1); j++) {
+                
+                Console.WriteLine(arr4Inverse[i, j] + " ");
+            }
+
+            Console.WriteLine(" ");
+        }
 
         // //Challenge 5
-        // Demo("hello", 1, 2, "world");
+        Demo("hello", 1, 2, "world");
 
         // //Challenge 6
 
@@ -79,21 +88,21 @@
     {
         Console.WriteLine("The numbers in reverse are");
 
-        foreach(int[] array in jaggedArray)
+        foreach (int[] array in jaggedArray)
         {
             int[] result = new int[array.Length];
 
-            for(int i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 result[array.Length - 1 - i] = array[i];
             }
 
-            for(int i = 0; i < array.Length; i++)
+            for (int i = 0; i < array.Length; i++)
             {
                 array[i] = result[i];
                 Console.WriteLine(array[i]);
             }
-        }  
+        }
     }
 
     /* 
@@ -103,7 +112,27 @@
      */
     static void CalculateDiff(int[][] jaggedArray)
     {
+        Console.WriteLine("The difference between the numbers are: ");
 
+        for (int i = 0; i < jaggedArray.Length; i++)
+        {
+            int[] difference = new int[jaggedArray[i].Length - 1];
+
+            for (int j = 0; j < jaggedArray[i].Length - 1; j++)
+            {
+                difference[j] = jaggedArray[i][j] - jaggedArray[i][j + 1];
+            }
+            jaggedArray[i] = difference;
+        }
+
+        for (int i = 0; i < jaggedArray.Length; i++)
+        {
+            for (int j = 0; j < jaggedArray[i].Length; j++)
+            {
+                Console.Write(jaggedArray[i][j] + " ");
+            }
+            Console.WriteLine(" ");
+        }
     }
 
     /* 
@@ -111,10 +140,37 @@
     For example, given: int[,] arr = {{1,2,3}, {4,5,6}}
     Expected result: {{1,2},{3,4},{5,6}}
      */
-    // static int[,] InverseRec(int[,] recArray)
-    // {
+    static int[,] InverseRec(int[,] recArray)
+    {
+        int row = recArray.GetLength(0);
+        int col = recArray.GetLength(1);
+        int [,] result = new int[col, row];
 
-    // }
+        int x = 0;
+        int y = 0;
+
+        Console.WriteLine("Two rows and three colums to three rows and two colums: ");
+
+        for(int i = 0; i < row; i++)
+        {
+            for(int j = 0; j < col; j++)
+            {
+                result[x, y] = recArray[i, j];
+
+                if(y == row - 1)
+                {
+                    y = 0;
+                    x += 1;
+                }
+                else
+                {
+                    y += 1;
+                }
+            }
+        }
+
+        return result;
+    }
 
     /* 
     Challenge 5. Write a function that accepts a variable number of params of any of these types: 
@@ -124,10 +180,10 @@
     - Finally print everything out. 
     Example: Demo("hello", 1, 2, "world") 
     Expected result: hello world; 3 */
-    // static void Demo()
-    // {
+    static void Demo()
+    {
 
-    // }
+    }
 
     /* Challenge 6. Write a function to swap 2 objects but only if they are of the same type 
     and if they’re string, lengths have to be more than 5. 
